@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Office.Interop.PowerPoint;
 using PowerPointTimer.Model;
+using PowerPointTimer.Util;
 
 namespace PowerPointTimer
 {
@@ -32,18 +33,20 @@ namespace PowerPointTimer
         private void OnSlideExiting()
         {
             _activeTimerData?.Dispose();
+            _activeTimerData = null;
         }
 
         private void OnSlideShowEnd(Presentation Pres)
         {
             _activeTimerData?.Dispose();
+            _activeTimerData = null;
         }
 
         private Shape FindTimerOnSlide(Slide slide)
         {
             foreach (Shape shape in slide.Shapes)
             {
-                if (shape.Tags["TimerTag"] == "Timer")
+                if (shape.Tags[Constants.TimerTagName] == Constants.DigitalTimerTagValue)
                 {
                     return shape;
                 }
@@ -63,8 +66,8 @@ namespace PowerPointTimer
         /// </summary>
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            this.Startup += new EventHandler(ThisAddIn_Startup);
+            this.Shutdown += new EventHandler(ThisAddIn_Shutdown);
         }
         
         #endregion

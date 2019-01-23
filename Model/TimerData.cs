@@ -1,6 +1,7 @@
 ﻿using Microsoft.Office.Interop.PowerPoint;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,18 +24,19 @@ namespace PowerPointTimer.Model
             _timer.Elapsed += TimerTick;
             _timer.Start();
             TimerShape = timerShape;
-            Duration = TimerShape.TextFrame.TextRange.Text;
+            Duration = GetShapeText();
         }
 
         private void TimerTick(object _, ElapsedEventArgs __)
         {
             string timeText = GetShapeText();
-            if(TimeSpan.TryParse(timeText, out TimeSpan time))
+            if(TimeSpan.TryParseExact(timeText, "mm\\:ss",
+                CultureInfo.InvariantCulture, out TimeSpan time))
             {
                 if (time.TotalSeconds == 0)
                     return;
                 time = time - OneSecond;
-                SetShapeText(time.ToString());
+                SetShapeText(time.ToString("mm\\:ss"));
             } else
             {
                 SetShapeText($"Invalid format: {Duration}");
@@ -48,7 +50,12 @@ namespace PowerPointTimer.Model
 
         private string GetShapeText()
         {
-            return TimerShape.TextFrame.TextRange.Text;
+            if (TimerShape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue)
+            {
+                return TimerShape.TextFrame2.TextRange.Text;
+            }
+
+            return "No text found.";
         }
 
         public void Dispose()

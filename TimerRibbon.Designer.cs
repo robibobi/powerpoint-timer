@@ -34,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerRibbon));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.TimerGroup = this.Factory.CreateRibbonGroup();
             this.AddTimerButton = this.Factory.CreateRibbonButton();
@@ -57,7 +58,8 @@
             // AddTimerButton
             // 
             this.AddTimerButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.AddTimerButton.Label = "Add a Timer";
+            this.AddTimerButton.Image = ((System.Drawing.Image)(resources.GetObject("AddTimerButton.Image")));
+            this.AddTimerButton.Label = "Digital (mm:ss)";
             this.AddTimerButton.Name = "AddTimerButton";
             this.AddTimerButton.ShowImage = true;
             this.AddTimerButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AddTimerButton_Click);
@@ -67,7 +69,6 @@
             this.Name = "TimerRibbon";
             this.RibbonType = "Microsoft.PowerPoint.Presentation";
             this.Tabs.Add(this.tab1);
-            this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.TimerRibbon_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.TimerGroup.ResumeLayout(false);

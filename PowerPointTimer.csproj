@@ -163,6 +163,7 @@
     <Compile Include="TimerRibbon.Designer.cs">
       <DependentUpon>TimerRibbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\SlideHelpers.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
