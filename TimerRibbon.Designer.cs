@@ -34,35 +34,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerRibbon));
             this.tab1 = this.Factory.CreateRibbonTab();
-            this.TimerGroup = this.Factory.CreateRibbonGroup();
-            this.AddTimerButton = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
+            this.AddDigitalTimerButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
-            this.TimerGroup.SuspendLayout();
+            this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.tab1.Groups.Add(this.TimerGroup);
+            this.tab1.Groups.Add(this.group1);
             this.tab1.Label = "TabAddIns";
             this.tab1.Name = "tab1";
             // 
-            // TimerGroup
+            // group1
             // 
-            this.TimerGroup.Items.Add(this.AddTimerButton);
-            this.TimerGroup.Label = "Timers";
-            this.TimerGroup.Name = "TimerGroup";
+            this.group1.Items.Add(this.AddDigitalTimerButton);
+            this.group1.Label = "Timers";
+            this.group1.Name = "group1";
             // 
-            // AddTimerButton
+            // AddDigitalTimerButton
             // 
-            this.AddTimerButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.AddTimerButton.Image = ((System.Drawing.Image)(resources.GetObject("AddTimerButton.Image")));
-            this.AddTimerButton.Label = "Digital (mm:ss)";
-            this.AddTimerButton.Name = "AddTimerButton";
-            this.AddTimerButton.ShowImage = true;
-            this.AddTimerButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AddTimerButton_Click);
+            this.AddDigitalTimerButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.AddDigitalTimerButton.Image = global::PowerPointTimer.Properties.Resources.Icon1;
+            this.AddDigitalTimerButton.Label = "digital";
+            this.AddDigitalTimerButton.Name = "AddDigitalTimerButton";
+            this.AddDigitalTimerButton.ShowImage = true;
+            this.AddDigitalTimerButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AddDigitalTimerButton_Click);
             // 
             // TimerRibbon
             // 
@@ -71,8 +70,8 @@
             this.Tabs.Add(this.tab1);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
-            this.TimerGroup.ResumeLayout(false);
-            this.TimerGroup.PerformLayout();
+            this.group1.ResumeLayout(false);
+            this.group1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -80,8 +79,8 @@
         #endregion
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup TimerGroup;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton AddTimerButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AddDigitalTimerButton;
     }
 
     partial class ThisRibbonCollection

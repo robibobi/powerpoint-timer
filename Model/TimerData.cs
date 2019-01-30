@@ -12,19 +12,18 @@ namespace PowerPointTimer.Model
     class TimerData : IDisposable
     {
         private static readonly TimeSpan OneSecond = TimeSpan.FromSeconds(1);
-        private Timer _timer;
 
-        public string Duration { get; }
-
-        public Shape TimerShape { get; }
+        private readonly Timer _timer;
+        private readonly string _duration;
+        private readonly Shape _timerShape;
 
         public TimerData(Shape timerShape)
         {
-            _timer = new Timer(1000);
+            _timer = new Timer(OneSecond.TotalMilliseconds);
             _timer.Elapsed += TimerTick;
             _timer.Start();
-            TimerShape = timerShape;
-            Duration = GetShapeText();
+            _timerShape = timerShape;
+            _duration = GetShapeText();
         }
 
         private void TimerTick(object _, ElapsedEventArgs __)
@@ -39,20 +38,20 @@ namespace PowerPointTimer.Model
                 SetShapeText(time.ToString("mm\\:ss"));
             } else
             {
-                SetShapeText($"Invalid format: {Duration}");
+                SetShapeText($"Invalid format: {_duration}");
             }
         }
 
         private void SetShapeText(string text)
         {
-            TimerShape.TextFrame.TextRange.Text = text;
+            _timerShape.TextFrame.TextRange.Text = text;
         }
 
         private string GetShapeText()
         {
-            if (TimerShape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue)
+            if (_timerShape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue)
             {
-                return TimerShape.TextFrame2.TextRange.Text;
+                return _timerShape.TextFrame2.TextRange.Text;
             }
 
             return "No text found.";
@@ -60,7 +59,7 @@ namespace PowerPointTimer.Model
 
         public void Dispose()
         {
-            SetShapeText(Duration);
+            SetShapeText(_duration);
             _timer.Dispose();
         }
     }

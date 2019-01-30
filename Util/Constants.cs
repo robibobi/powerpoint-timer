@@ -10,5 +10,7 @@ namespace PowerPointTimer.Util
     {
         public const string TimerTagName = "TimerTag";
         public const string DigitalTimerTagValue = "DigitalTimer";
+
+        public const string DefaultTimeString = "05:00";
     }
 }
